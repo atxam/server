@@ -1,13 +1,16 @@
 const express = require('express');
 const path = require('path');
-
-const publicPath = path.resolve(__dirname, '../public');
+const port = process.env.PORT || 8080;
 const app = express();
 
-app.use(express.static(publicPath));
+// the __dirname is the current directory from where the script is running
+app.use(express.static(__dirname));
 
-app.listen(8080, () => {
+// send the user to index html page inspite of the url
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'index.html'));
+});
+
+app.listen(prot, () => {
   console.log('Server has been started..');
 })
-
-
